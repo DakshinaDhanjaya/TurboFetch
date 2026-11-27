@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -87,7 +88,7 @@ class SetupWizard(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.title(f"{APP_NAME} Setup v{APP_VERSION}")
-        self.geometry("540x390")
+        self.geometry("540x415")
         self.resizable(False, False)
         self.configure(bg="#0b1220")
         ico = resource_path("icon.ico")
@@ -102,6 +103,7 @@ class SetupWizard(tk.Tk):
         self.var_desktop = tk.BooleanVar(value=True)
         self.var_startmenu = tk.BooleanVar(value=True)
         self.var_autostart = tk.BooleanVar(value=False)
+        self.var_browser_ext = tk.BooleanVar(value=True)
         self.var_launch = tk.BooleanVar(value=True)
         self.var_status = tk.StringVar(value="Ready to install TurboFetch on your PC.")
         self._installing = False
@@ -172,6 +174,7 @@ class SetupWizard(tk.Tk):
             ("Create a Desktop shortcut", self.var_desktop),
             ("Add TurboFetch to Start Menu", self.var_startmenu),
             ("Start TurboFetch automatically with Windows", self.var_autostart),
+            ("Set up Browser Extension (Chrome / Edge / Firefox)", self.var_browser_ext),
             ("Launch TurboFetch after installation", self.var_launch),
         ):
             tk.Checkbutton(
@@ -281,6 +284,12 @@ class SetupWizard(tk.Tk):
                         self._set_ui(f"Installing files... ({idx}/{total})", pct)
 
             exe_path = install_dir / "TurboFetch.exe"
+            bundled_ext = install_dir / "_internal" / "turbofetch" / "extension"
+            public_ext = install_dir / "Browser Extension"
+            if bundled_ext.exists():
+                if public_ext.exists():
+                    shutil.rmtree(public_ext, ignore_errors=True)
+                shutil.copytree(bundled_ext, public_ext)
             ico_path = install_dir / "_internal" / "turbofetch" / "app" / "ui" / "icon.ico"
             if not ico_path.exists():
                 ico_path = exe_path
@@ -314,7 +323,10 @@ class SetupWizard(tk.Tk):
             def finish() -> None:
                 self._installing = False
                 if self.var_launch.get() and exe_path.exists():
-                    subprocess.Popen([str(exe_path)], cwd=str(install_dir))
+                    launch_cmd = [str(exe_path)]
+                    if self.var_browser_ext.get():
+                        launch_cmd.append("--setup-extension")
+                    subprocess.Popen(launch_cmd, cwd=str(install_dir))
                 messagebox.showinfo(
                     "Setup Complete",
                     f"{APP_NAME} has been installed to:\n{install_dir}",
