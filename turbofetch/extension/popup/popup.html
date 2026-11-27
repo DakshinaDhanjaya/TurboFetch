@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TurboFetch</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <span class="logo">TF</span>
+        <div>
+          <h1>TurboFetch</h1>
+          <div id="status-badge" class="status offline">Checking...</div>
+        </div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-enabled">
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <section class="quick-add">
+      <input type="url" id="quick-url" placeholder="Paste URL to download...">
+      <button id="btn-add" class="btn primary">Fetch</button>
+    </section>
+
+    <section class="actions">
+      <button id="btn-pause-all" class="btn">Pause All</button>
+      <button id="btn-resume-all" class="btn">Resume All</button>
+      <button id="btn-options" class="btn">Options</button>
+    </section>
+
+    <section id="media-section" class="section hidden">
+      <h2>Detected Media</h2>
+      <div id="media-list" class="list"></div>
+    </section>
+
+    <section class="section">
+      <h2>Active & Recent Downloads</h2>
+      <div id="downloads-list" class="list">
+        <div class="empty">No downloads yet</div>
+      </div>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

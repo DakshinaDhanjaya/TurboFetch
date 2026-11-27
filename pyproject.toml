@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "turbofetch"
+version = "1.0.0"
+description = "Free and open-source multi-connection Windows download manager"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}

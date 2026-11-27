@@ -1,0 +1,156 @@
+from typing import Optional
+
+TRANSLATIONS: dict[str, dict[str, str]] = {
+    "en": {
+        "app.title": "TurboFetch Download Manager",
+        "app.quit": "Quit",
+        "app.settings": "Settings",
+        "app.about": "About",
+        "menu.file": "File",
+        "menu.edit": "Edit",
+        "menu.downloads": "Downloads",
+        "menu.view": "View",
+        "menu.help": "Help",
+        "action.add_url": "Add URL...",
+        "action.video_grab": "Video Grab (yt-dlp)...",
+        "action.site_grabber": "Site Grabber...",
+        "action.import": "Import Downloads...",
+        "action.export": "Export Downloads...",
+        "action.export_txt": "Export URL List (.txt)...",
+        "action.history": "Download History...",
+        "action.settings": "Settings...",
+        "action.exit": "Exit",
+        "action.add": "Add",
+        "action.pause": "Pause",
+        "action.resume": "Resume",
+        "action.stop": "Stop",
+        "action.delete": "Delete",
+        "action.cancel": "Cancel",
+        "action.retry": "Retry",
+        "action.open_file": "Open",
+        "action.open_folder": "Folder",
+        "action.schedule": "Schedule",
+        "action.video": "Video",
+        "action.select_all": "Select All",
+        "action.find": "Find",
+        "action.resume_all": "Resume All",
+        "action.pause_all": "Pause All",
+        "action.stop_all": "Stop All",
+        "action.retry_all": "Retry All Failed",
+        "action.clear_completed": "Clear Completed",
+        "action.toggle_theme": "Toggle Dark / Light Theme",
+        "action.show_segbar": "Show Segment Bar",
+        "action.show_speed_graph": "Show Speed Graph",
+        "action.drop_basket": "Floating Drop Basket",
+        "action.check_updates": "Check for Updates",
+        "cat.header": "Categories",
+        "cat.all": "All Downloads",
+        "cat.compressed": "Compressed",
+        "cat.documents": "Documents",
+        "cat.music": "Music",
+        "cat.video": "Video",
+        "cat.programs": "Programs",
+        "cat.other": "Other",
+        "status.header": "Status",
+        "status.unfinished": "Unfinished",
+        "status.finished": "Finished",
+        "status.downloading": "Downloading",
+        "status.paused": "Paused",
+        "status.completed": "Completed",
+        "status.failed": "Failed",
+        "status.queued": "Queued",
+        "status.cancelled": "Cancelled",
+        "status.merging": "Merging",
+        "status.verifying": "Verifying",
+        "queues.header": "Queues",
+        "status.ready": "Ready",
+    },
+    "si": {
+        "app.title": "TurboFetch බාගත කළමනාකරු",
+        "app.quit": "පිටවීම",
+        "app.settings": "සැකසුම්",
+        "app.about": "පිළිබඳව",
+        "menu.file": "ගොනු",
+        "menu.edit": "සංස්කරණය",
+        "menu.downloads": "බාගැනීම්",
+        "menu.view": "පෙනුම",
+        "menu.help": "උදවු",
+        "action.add_url": "URL එක් කරන්න...",
+        "action.video_grab": "වීඩියෝ බාගන්න (yt-dlp)...",
+        "action.site_grabber": "වෙබ් අඩවි ග්‍රැබර්...",
+        "action.import": "බාගැනීම් ආයාත කරන්න...",
+        "action.export": "බාගැනීම් නිර්යාත කරන්න...",
+        "action.export_txt": "URL ලැයිස්තුව නිර්යාත (.txt)...",
+        "action.history": "බාගැනීම් ඉතිහාසය...",
+        "action.settings": "සැකසුම්...",
+        "action.exit": "පිටවන්න",
+        "action.add": "එක් කරන්න",
+        "action.pause": "විරාමය",
+        "action.resume": "අරඹන්න",
+        "action.stop": "නවතන්න",
+        "action.delete": "මකන්න",
+        "action.cancel": "අවලංගු",
+        "action.retry": "නැවත උත්සාහ",
+        "action.open_file": "විවෘත",
+        "action.open_folder": "ෆෝල්ඩරය",
+        "action.schedule": "කාලසටහන",
+        "action.video": "වීඩියෝ",
+        "action.select_all": "සියල්ල තෝරන්න",
+        "action.find": "සොයන්න",
+        "action.resume_all": "සියල්ල අරඹන්න",
+        "action.pause_all": "සියල්ල විරාම කරන්න",
+        "action.stop_all": "සියල්ල නවතන්න",
+        "action.retry_all": "අසාර්ථක සියල්ල නැවත",
+        "action.clear_completed": "සම්පූර්ණ ඒවා ඉවත් කරන්න",
+        "action.toggle_theme": "අඳුරු / ආලෝක තේමාව මාරු කරන්න",
+        "action.show_segbar": "කොටස් තීරුව පෙන්වන්න",
+        "action.show_speed_graph": "වේග ප්‍රස්තාරය පෙන්වන්න",
+        "action.drop_basket": "පාවෙන Drop Basket",
+        "action.check_updates": "යාවත්කාලීන පරීක්ෂා කරන්න",
+        "cat.header": "වර්ග",
+        "cat.all": "සියලුම බාගැනීම්",
+        "cat.compressed": "සම්පීඩිත ගොනු",
+        "cat.documents": "ලේඛන",
+        "cat.music": "සංගීතය",
+        "cat.video": "වීඩියෝ",
+        "cat.programs": "මෘදුකාංග",
+        "cat.other": "වෙනත්",
+        "status.header": "තත්ත්වය",
+        "status.unfinished": "අසම්පූර්ණ",
+        "status.finished": "අවසන්",
+        "status.downloading": "බාගත වෙමින්",
+        "status.paused": "විරාම කළා",
+        "status.completed": "සම්පූර්ණයි",
+        "status.failed": "අසාර්ථකයි",
+        "status.queued": "පෝලිමේ",
+        "status.cancelled": "අවලංගු කළා",
+        "status.merging": "ඒකාබද්ධ වෙමින්",
+        "status.verifying": "තහවුරු කරමින්",
+        "queues.header": "පෝලිම්",
+        "status.ready": "සූදානම්",
+    },
+}
+
+_current_language: str = "en"
+
+
+def set_language(lang: str) -> None:
+    global _current_language
+    if lang not in TRANSLATIONS:
+        raise ValueError(f"Unsupported language: {lang}")
+    _current_language = lang
+
+
+def tr(key: str, lang: Optional[str] = None) -> str:
+    language = lang or _current_language
+    translations = TRANSLATIONS.get(language, {})
+    result = translations.get(key)
+    if result is not None:
+        return result
+    if language != "en":
+        return TRANSLATIONS.get("en", {}).get(key, key)
+    return key
+
+
+def _(key: str) -> str:
+    return tr(key, _current_language)

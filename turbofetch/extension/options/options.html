@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TurboFetch Extension Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page">
+    <h1>TurboFetch Extension Settings</h1>
+
+    <div class="card">
+      <h2>Desktop App Pairing</h2>
+      <label for="port">Local Server Port</label>
+      <input type="number" id="port" min="1024" max="65535" value="29512">
+
+      <label for="token">Pairing Token (from Desktop App Settings &gt; Extension)</label>
+      <div class="row">
+        <input type="text" id="token" placeholder="Paste 32-char pairing token">
+        <button id="btn-pair" class="btn primary">Pair</button>
+      </div>
+      <div id="pair-status" class="hint"></div>
+    </div>
+
+    <div class="card">
+      <h2>Download Interception Filters</h2>
+      <label for="min-size">Minimum File Size (MB)</label>
+      <input type="number" id="min-size" min="0" step="0.5" value="1">
+
+      <label for="file-types">Intercepted File Extensions (comma-separated)</label>
+      <textarea id="file-types" rows="3"></textarea>
+
+      <label for="excluded-domains">Excluded Domains (one per line)</label>
+      <textarea id="excluded-domains" rows="4" placeholder="localhost&#10;intranet.local"></textarea>
+    </div>
+
+    <div class="footer">
+      <button id="btn-reset" class="btn">Reset Defaults</button>
+      <button id="btn-save" class="btn primary">Save Settings</button>
+    </div>
+    <div id="save-status" class="hint"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
